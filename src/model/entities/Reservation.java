@@ -39,6 +39,14 @@ public class Reservation {
 	    }
 
 	    public String updateDates(Date checkIn, Date checkOut){
+	    	
+	    	Date now = new Date();
+	        if (checkIn.before(now) || checkOut.before(now)) {
+	            return "Reservation dates for updates must be future dates";
+	        } else if (!checkOut.after(checkIn)) {
+	            return "Check-out date must be after check-in dates";
+	        }
+	        
 	        this.checkIn = checkIn;
 	        this.checkOut = checkOut;
 	        return null; //O null significa que método não deu nenhum erro.
